@@ -13,6 +13,14 @@ RUN npm ci
 # Copy application code
 COPY . .
 
+# Accept build argument for API URL
+ARG VITE_API_URL
+ARG VITE_WS_URL
+
+# Set environment variables for the build
+ENV VITE_API_URL=${VITE_API_URL}
+ENV VITE_WS_URL=${VITE_WS_URL}
+
 # Build the application
 RUN npm run build
 

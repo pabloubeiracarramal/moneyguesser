@@ -25,6 +25,7 @@ services:
       dockerfile: Dockerfile
       args:
         - VITE_API_URL=https://moneyguesser-api.pabloubeiracarramal.com/v1
+        - VITE_WS_URL=wss://moneyguesser-api.pabloubeiracarramal.com
     container_name: moneyguesser-frontend
     ports:
       - "3300:80"
