@@ -24,7 +24,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_URL=http://localhost:3301
+        - VITE_API_URL=https://api-moneyguesser.pabloubeiracarramal.com
     container_name: moneyguesser-frontend
     ports:
       - "3300:80"
