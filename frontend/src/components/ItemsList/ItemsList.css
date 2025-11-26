@@ -1,0 +1,184 @@
+.items-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.items-count {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.count-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.pending-badge {
+  background: #ff9800;
+  color: var(--bg-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.items-container {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-dark);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  min-height: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin: 0.5rem 0;
+}
+
+.empty-state .hint {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.items-group {
+  margin-bottom: 2rem;
+}
+
+.items-group:last-child {
+  margin-bottom: 0;
+}
+
+.group-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--bg-light);
+  color: var(--text-primary);
+}
+
+.group-title.pending {
+  color: #ff9800;
+  border-bottom-color: #ff9800;
+}
+
+.group-title.confirmed {
+  color: #4caf50;
+  border-bottom-color: #4caf50;
+}
+
+.items-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.item-card {
+  background: var(--bg-light);
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.item-card.editable {
+  cursor: pointer;
+}
+
+.item-card.editable:hover {
+  background: rgba(33, 150, 243, 0.1);
+  border-color: var(--secondary-color);
+}
+
+.item-card.add-new {
+  cursor: pointer;
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px dashed var(--primary-color);
+}
+
+.item-card.add-new:hover {
+  background: rgba(76, 175, 80, 0.15);
+  border-style: solid;
+}
+
+.item-card.add-new.selected {
+  background: rgba(76, 175, 80, 0.2);
+  border-style: solid;
+}
+
+.item-card.selected {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: var(--secondary-color);
+}
+
+.item-card.confirmed {
+  background: var(--bg-light);
+  opacity: 0.7;
+}
+
+.item-label {
+  font-weight: 500;
+  flex: 1;
+  word-break: break-word;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.item-label.add-new-label {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  color: var(--danger-color);
+}
+
+.btn-send {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}

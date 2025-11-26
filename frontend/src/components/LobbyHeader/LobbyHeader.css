@@ -1,0 +1,13 @@
+.lobby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.lobby-header h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+}

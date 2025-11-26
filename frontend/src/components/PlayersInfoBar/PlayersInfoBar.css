@@ -1,0 +1,26 @@
+.players-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9375rem;
+  padding: 0.9375rem 1.25rem;
+  background: var(--bg-medium);
+  border-radius: var(--border-radius);
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.players-count {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.players-names {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
