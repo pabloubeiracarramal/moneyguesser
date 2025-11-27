@@ -273,10 +273,10 @@ export class RoomManager {
 
     this.broadcast(roomCode, 'room.updated', room.toJSON(true));
 
-    // Wait 5 seconds before next round
+    // Wait 20 seconds before next round (reveal animation + leaderboard display)
     setTimeout(() => {
       this.startRound(roomCode);
-    }, 5000);
+    }, 20000);
   }
 
   /**

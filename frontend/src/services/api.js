@@ -38,6 +38,28 @@ export async function getRoomState(roomCode) {
 }
 
 /**
+ * Leave a room
+ */
+export async function leaveRoom(roomCode, token, isHost = false) {
+  const response = await fetch(`${API_BASE_URL}/rooms/${roomCode}/leave`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(
+      isHost ? { hostToken: token } : { playerToken: token }
+    ),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to leave room');
+  }
+
+  return response.json();
+}
+
+/**
  * Join a room as a player
  */
 export async function joinRoom(roomCode, displayName) {

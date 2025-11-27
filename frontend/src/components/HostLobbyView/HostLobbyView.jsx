@@ -100,6 +100,83 @@ export default function HostLobbyView({ room, roomCode, token, onRoomUpdate }) {
     };
   };
 
+  const handleExportItems = () => {
+    const allItems = [
+      ...localItems,
+      ...(room?.items || []).map(item => ({
+        id: item.id,
+        label: item.label,
+        imageUrl: item.imageUrl,
+        priceCents: item.priceCents
+      }))
+    ];
+
+    if (allItems.length === 0) {
+      setError('No items to export');
+      return;
+    }
+
+    const exportData = {
+      items: allItems.map(({ label, imageUrl, priceCents }) => ({
+        label,
+        imageUrl,
+        priceCents
+      })),
+      roundDuration: roundDuration,
+      exportDate: new Date().toISOString()
+    };
+
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `moneyguesser-items-${Date.now()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    setError('');
+  };
+
+  const handleImportItems = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importData = JSON.parse(e.target.result);
+        
+        if (!importData.items || !Array.isArray(importData.items)) {
+          setError('Invalid file format');
+          return;
+        }
+
+        const importedItems = importData.items.map((item, index) => ({
+          id: Date.now() + index,
+          label: item.label,
+          imageUrl: item.imageUrl,
+          priceCents: item.priceCents
+        }));
+
+        setLocalItems(prevItems => [...prevItems, ...importedItems]);
+        
+        if (importData.roundDuration) {
+          handleRoundDurationChange(importData.roundDuration);
+        }
+
+        setError('');
+      } catch (err) {
+        setError('Failed to import items: Invalid JSON file');
+      }
+    };
+    
+    reader.readAsText(file);
+    event.target.value = '';
+  };
+
   const handleStartGame = async () => {
     const totalItems = localItems.length + (room?.totalRounds || 0);
     
@@ -149,6 +226,8 @@ export default function HostLobbyView({ room, roomCode, token, onRoomUpdate }) {
           }
         }}
         onRemoveItem={handleRemoveItem}
+        onExport={handleExportItems}
+        onImport={handleImportItems}
       />
 
       <ItemForm

@@ -17,6 +17,25 @@
   flex-direction: column;
 }
 
+.btn-back {
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  border: 1px solid var(--text-secondary);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: var(--text-secondary);
+  color: var(--bg-primary);
+  transform: translateX(-2px);
+}
+
 .connection-status {
   padding: 0.5rem 1rem;
   background: var(--bg-light);

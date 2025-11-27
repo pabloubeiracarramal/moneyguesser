@@ -109,6 +109,7 @@ export default function Results() {
           height={windowDimensions.height}
           recycle={false}
           numberOfPieces={300}
+          colors={['#efbc31']}
         />
       )}
       <div className="results-container">
@@ -165,12 +166,6 @@ export default function Results() {
             ))}
           </div>
         </div>
-
-        {isWinner && (
-          <div className="winner-message">
-            🎉 Congratulations! You won! 🎉
-          </div>
-        )}
 
         <button className="btn btn-primary btn-play-again" onClick={handlePlayAgain}>
           Play Again

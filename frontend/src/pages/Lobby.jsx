@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
 import { useWebSocket } from '../hooks/useWebSocket';
-import { getRoomState } from '../services/api';
+import { getRoomState, leaveRoom } from '../services/api';
 import './Lobby.css';
 import LobbyHeader from '../components/LobbyHeader/LobbyHeader';
 import PlayersInfoBar from '../components/PlayersInfoBar/PlayersInfoBar';
@@ -12,7 +12,7 @@ import PlayerLobbyView from '../components/PlayerLobbyView/PlayerLobbyView';
 export default function Lobby() {
   const { roomCode: urlRoomCode } = useParams();
   const navigate = useNavigate();
-  const { roomCode, token, isHost, setRoomState } = useGame();
+  const { roomCode, token, isHost, setRoomState, clearGameState } = useGame();
   
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,6 +46,19 @@ export default function Lobby() {
     } catch (err) {
       setError(err.message);
       setLoading(false);
+    }
+  };
+
+  const handleLeaveRoom = async () => {
+    try {
+      await leaveRoom(roomCode || urlRoomCode, token, isHost);
+      clearGameState();
+      navigate('/');
+    } catch (err) {
+      console.error('Error leaving room:', err);
+      // Navigate away anyway
+      clearGameState();
+      navigate('/');
     }
   };
 
@@ -111,7 +124,7 @@ export default function Lobby() {
   return (
     <div className="lobby">
       <div className="lobby-container">
-        <LobbyHeader room={room} isConnected={isConnected} />
+        <LobbyHeader room={room} handleLeaveRoom={handleLeaveRoom} />
 
         {error && <div className="error-message">{error}</div>}   
 

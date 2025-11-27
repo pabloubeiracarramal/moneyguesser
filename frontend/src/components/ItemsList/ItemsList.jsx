@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import './ItemsList.css';
 
 export default function ItemsList({ 
@@ -5,9 +6,16 @@ export default function ItemsList({
   roomItems, 
   editingItemId,
   onEditItem, 
-  onRemoveItem
+  onRemoveItem,
+  onExport,
+  onImport
 }) {
+  const fileInputRef = useRef(null);
   const allItems = [...localItems, ...roomItems];
+
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
 
   if (allItems.length === 0) {
     return (
@@ -16,6 +24,20 @@ export default function ItemsList({
           <h2>Game Items</h2>
           <div className="items-count">
             <span className="count-badge">0</span>
+            <button 
+              className="btn-icon btn-import"
+              onClick={handleImportClick}
+              title="Import items from JSON file"
+            >
+              📥
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              onChange={onImport}
+              style={{ display: 'none' }}
+            />
           </div>
         </div>
         <div className="items-container">
@@ -34,6 +56,27 @@ export default function ItemsList({
         <h2>Game Items</h2>
         <div className="items-count">
           <span className="count-badge">{allItems.length}</span>
+          <button 
+            className="btn-icon btn-export"
+            onClick={onExport}
+            title="Export items to JSON file"
+          >
+            📤
+          </button>
+          <button 
+            className="btn-icon btn-import"
+            onClick={handleImportClick}
+            title="Import items from JSON file"
+          >
+            📥
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            onChange={onImport}
+            style={{ display: 'none' }}
+          />
         </div>
       </div>
 

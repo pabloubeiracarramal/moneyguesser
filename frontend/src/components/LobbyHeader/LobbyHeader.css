@@ -5,9 +5,14 @@
   margin-bottom: 1.25rem;
   flex-wrap: wrap;
   gap: 0.625rem;
+  width: 100%;
 }
 
 .lobby-header h1 {
   font-size: 2rem;
   color: var(--text-primary);
+}
+
+.lobby-header .btn-back {
+  margin: 0;
 }

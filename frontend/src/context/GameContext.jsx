@@ -10,6 +10,15 @@ export function GameProvider({ children }) {
   const [playerId, setPlayerId] = useState('');
   const [roomState, setRoomState] = useState(null);
 
+  const clearGameState = () => {
+    setRoomCode('');
+    setToken('');
+    setIsHost(false);
+    setDisplayName('');
+    setPlayerId('');
+    setRoomState(null);
+  };
+
   const value = {
     roomCode,
     setRoomCode,
@@ -23,6 +32,7 @@ export function GameProvider({ children }) {
     setPlayerId,
     roomState,
     setRoomState,
+    clearGameState,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

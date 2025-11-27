@@ -299,4 +299,41 @@ router.get('/:roomCode/leaderboard', (req, res) => {
   }
 });
 
+/**
+ * POST /rooms/:roomCode/leave
+ * Leave a room (player or host)
+ */
+router.post('/:roomCode/leave', (req, res) => {
+  try {
+    const { roomCode } = req.params;
+    const { playerToken, hostToken } = req.body;
+
+    const room = roomManager.getRoom(roomCode);
+    if (!room) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+
+    // If host is leaving, delete the room
+    if (hostToken && room.verifyHostToken(hostToken)) {
+      roomManager.deleteRoom(roomCode);
+      return res.json({ message: 'Room closed' });
+    }
+
+    // If player is leaving, remove them from the room
+    if (playerToken) {
+      const player = room.getPlayerByToken(playerToken);
+      if (player) {
+        room.removePlayer(player.id);
+        roomManager.broadcast(roomCode, 'room.updated', room.toJSON());
+        return res.json({ message: 'Left room' });
+      }
+    }
+
+    res.status(400).json({ error: 'Invalid token' });
+  } catch (error) {
+    console.error('Error leaving room:', error);
+    res.status(500).json({ error: 'Failed to leave room' });
+  }
+});
+
 export default router;

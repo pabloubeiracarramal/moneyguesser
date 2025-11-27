@@ -57,6 +57,28 @@ export class Room {
   }
 
   /**
+   * Remove a player from the room
+   */
+  removePlayer(playerId) {
+    const player = this.players.get(playerId);
+    if (!player) return;
+
+    // Find and remove player token
+    for (const [token, pId] of this.playerTokens.entries()) {
+      if (pId === playerId) {
+        this.playerTokens.delete(token);
+        break;
+      }
+    }
+
+    // Remove player
+    this.players.delete(playerId);
+    
+    // Remove any pending guesses from this player
+    this.roundGuesses.delete(playerId);
+  }
+
+  /**
    * Add an item to the room
    */
   addItem(label, imageUrl, priceCents) {
