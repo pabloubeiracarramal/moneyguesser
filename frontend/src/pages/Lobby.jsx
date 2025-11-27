@@ -19,7 +19,8 @@ export default function Lobby() {
   const [error, setError] = useState('');
   const [countdown, setCountdown] = useState(null);
 
-  const { isConnected } = useWebSocket(roomCode || urlRoomCode, token);
+  // WebSocket connection
+  const ws = useWebSocket(roomCode || urlRoomCode, token);
 
   // Fetch initial room state
   useEffect(() => {
@@ -63,8 +64,6 @@ export default function Lobby() {
   };
 
   // Listen for WebSocket events
-  const ws = useWebSocket(roomCode || urlRoomCode, token);
-  
   useEffect(() => {
     if (!ws) return;
 
