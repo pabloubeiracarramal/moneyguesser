@@ -461,7 +461,7 @@
   padding: 0 1rem;
 }
 
-.leaderboard-item {
+.leaderboard-item-gm {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -472,11 +472,11 @@
   transition: transform 0.2s ease;
 }
 
-.leaderboard-item:hover {
+.leaderboard-item-gm:hover {
   transform: translateX(5px);
 }
 
-.leaderboard-item.current-player {
+.leaderboard-item-gm.current-player {
   background: white;
   border: 3px solid #1a1a1a;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);

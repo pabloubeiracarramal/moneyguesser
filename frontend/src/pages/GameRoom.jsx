@@ -184,7 +184,7 @@ export default function GameRoom() {
                 {leaderboardData.map((player, index) => (
                   <motion.div
                     key={player.playerId}
-                    className={`leaderboard-item ${player.playerId === playerId ? 'current-player' : ''}`}
+                    className={`leaderboard-item-gm ${player.playerId === playerId ? 'current-player' : ''}`}
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
