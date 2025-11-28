@@ -465,7 +465,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: var(--bg-light);
+  background: white;
   border-radius: var(--border-radius);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
@@ -476,7 +476,7 @@
 }
 
 .leaderboard-item.current-player {
-  background: var(--bg-light);
+  background: #ffedbd;
   border: 3px solid #1a1a1a;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
