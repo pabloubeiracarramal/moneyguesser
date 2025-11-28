@@ -152,7 +152,7 @@
   display: flex;
   align-items: center;
   padding: 1.25rem;
-  background: var(--bg-light);
+  background: white;
   border-radius: var(--border-radius);
   transition: all 0.3s ease;
 }
